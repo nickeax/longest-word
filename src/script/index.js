@@ -1,15 +1,15 @@
 import { words } from './data.js';
 const MAX_LENGTH = 8;
-const ALPHABET = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+const ALPHABET = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
 const lett = document.querySelector('#lett');
 const inputLetters = document.querySelector('#inputLetters');
 const resultsHeading = document.querySelector('#resultsHeading');
 
-let accessedFlag = "goodbye";
-let results = [];
+let firstUseFlag = false;
 
 inputLetters.addEventListener('keyup', _ => {
+    firstUseFlag = true;
     lettersArr = [];
     if (inputLetters.value.length > 9) {
         inputLetters.value = "";
@@ -39,12 +39,10 @@ function resetInputLetters() {
 
 function buildInputLetters(str) {
     for (let i = 0; i < str.length; i++) {
-        lettersArr.push(new Letter(str[i]));
+        lettersArr.push(new Letter(str[i].toLowerCase()));
     }
     lett.innerHTML = "";
     lettersArr.forEach(x => {
-        console.log(lettersArr);
-
         lett.innerHTML += `<span class="inputLetters">${x.letter}</span>`;
     });
 }
@@ -58,8 +56,8 @@ function processList() {
 
 function longestWord(arr) {
     let arr2 = [];
+    resetInputLetters();
     arr2 = arr.filter(x => {
-        resetInputLetters();
         return canBeSpelt(x);
     });
 
@@ -67,7 +65,7 @@ function longestWord(arr) {
         return b.length - a.length;
     });
 
-    if (tmpArr.length === 0) {
+    if (tmpArr.length === 0 && !firstUseFlag) {
         resultsHeading.innerHTML = "No words could be made from those letters!";
     } else resultsHeading.innerHTML = "Made from your letters";
     return tmpArr;
@@ -76,7 +74,7 @@ function longestWord(arr) {
 function canBeSpelt(str) {
     let numPassed = [];
     lettersArr.forEach(x => {
-        if (str.indexOf(x.letter) !== -1 && !x.used) {
+        if (str.indexOf(x.letter) !== -1) {
             x.used = true;
             numPassed.push(1);
         }
@@ -85,21 +83,20 @@ function canBeSpelt(str) {
     return str.length === numPassed.length;
 }
 
-// (async () => {
-//     await fetchTest();
-// })();
-
 function fetchTest() {
     let resArr = longestWord(processList());
-    accessedFlag = "hello";
     let resultsList = document.querySelector('#resultsList');
     resultsList.innerHTML = "";
 
     resArr.forEach(x => {
-        resultsList.innerHTML += `<div class="resultsList">${x}</div>`;
+        let res = x.split('');
+        res.forEach(y => {
+            resultsList.innerHTML += `<span class="inputLetters">${y}</span>`;
+        })
+        resultsList.innerHTML += "<br>";
     });
 }
 
-async function getTextFromStream(readableStream) {
+function getTextFromStream() {
     return words;
 }
