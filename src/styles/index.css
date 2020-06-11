@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Oswald:wght@300&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    --mainColor: rgb(49, 28, 0);
+    font-family: "Oswald";
+}
+
+#lett {
+    margin-top: 2rem;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.inputLetters, .resultsList {
+    font-family: "Open Sans";
+    background-color: rgb(103, 129, 116);
+    color: rgb(255, 255, 255);
+    padding: 0.3rem;
+    margin: 0.2rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    
+    border-radius: 0.2rem;
+}
+
+.container {
+    padding: 1rem;
+    background-color: rgb(184, 184, 184);
+    color: var(--mainColor);
+    width: 30vw;
+    height: auto;
+    margin: 4rem auto;
+    border:2px solid var(--mainColor);
+    border-radius: 0.3rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.mainHeading {
+    margin-bottom: 2rem;
+}
+
+.resultsHeading {
+    margin-top: 2rem;
+}
+
+input {
+    width: 100%;
+}
