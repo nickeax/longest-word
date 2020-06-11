@@ -7,7 +7,8 @@
     box-sizing: border-box;
 }
 body {
-    --mainColor: rgb(49, 28, 0);
+    --mainColour: rgb(49, 28, 0);
+    --mainBackgroundColour:rgb(6, 128, 121);
     font-family: "Oswald";
 }
 
@@ -19,7 +20,7 @@ body {
 
 .inputLetters, .resultsList {
     font-family: "Open Sans";
-    background-color: rgb(103, 129, 116);
+    background-color: var(--mainBackgroundColour);
     color: rgb(255, 255, 255);
     padding: 0.3rem;
     margin: 0.2rem;
@@ -31,11 +32,11 @@ body {
 .container {
     padding: 1rem;
     background-color: rgb(184, 184, 184);
-    color: var(--mainColor);
+    color: var(--mainColour);
     width: 30vw;
     height: auto;
     margin: 4rem auto;
-    border:2px solid var(--mainColor);
+    border:2px solid var(--mainColour);
     border-radius: 0.3rem;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
