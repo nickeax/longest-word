@@ -1,5 +1,5 @@
 import { words } from './data.js';
-const MAX_LENGTH = 8;
+const MAX_LENGTH = 12;
 const ALPHABET = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
 const lett = document.querySelector('#lett');
@@ -25,7 +25,7 @@ class Letter {
 inputLetters.addEventListener('keyup', _ => {
     firstUseFlag = true;
     lettersArr = [];
-    if (inputLetters.value.length >= 9) {
+    if (inputLetters.value.length >= MAX_LENGTH) {
         inputLetters.value = "";
     }
 
@@ -43,7 +43,9 @@ function buildInputLetters(str) {
     for (let i = 0; i < str.length; i++) {
         lettersArr.push(new Letter(str[i].toLowerCase()));
     }
+
     lett.innerHTML = "";
+
     lettersArr.forEach(x => {
         lett.innerHTML += `<span class="inputLetters">${x.letter}</span>`;
     });
@@ -96,7 +98,7 @@ function canBeSpelt(testWord) {
             }
         }
     }
-    let testStr = test.join();
+    let testStr = test.join('');
     return (testStr === testWord);
 }
 
