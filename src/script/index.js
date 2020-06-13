@@ -21,7 +21,7 @@ class Letter {
 
 (function () {
     allWords = processList();
-    footInfo.innerHTML = `<a class="fbLink" target="_blank" href="https://www.facebook.com/nickeax">Nick Fletcher ${new Date().getFullYear(0)}</a>`;
+    footInfo.innerHTML = `<a class="fbLink" target="_blank" href="https://www.facebook.com/nickeax">&copy;Nick Fletcher ${new Date().getFullYear(0)}</a>`;
 }());
 
 inputLetters.addEventListener('keyup', _ => {
@@ -122,7 +122,7 @@ function fetchTest() {
             resultsList.innerHTML += `<span class="inputLetters">${y}</span>`;
         })
         resultsList.innerHTML += `
-        <span class="faded">${x.length}</span>
+        <span class="faded">${x.length} ${x.length === lettersArr.length ? "<span class='anagram'>anagram</span>":""}</span>
         <a href="https://dictionary.cambridge.org/dictionary/english/${x}" target="_blank">definition</a>
         <br>`;
     });
