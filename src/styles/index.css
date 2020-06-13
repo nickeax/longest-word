@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 body {
-    --hue: 160;
+    --hue: 170;
     --sat: 60%;
     --lit1: 45%;
     --lit2: 35%;
@@ -48,11 +48,38 @@ body {
     border-radius: 0.2rem;
 }
 
+@media only screen and (max-width: 580px) {
+    .inputLetters, .resultsList, .resultsCount {
+        min-width: 1.2rem;
+        font-size: 0.8rem;
+    }
+} 
+
+.faded {
+    margin-left: 1rem;
+    color: rgba(255, 255, 255, 0.196);
+}
+
+a {
+    color: rgba(255, 255, 255, 0.493);
+    position: absolute;
+    text-decoration: none;
+    right: 1rem;
+    border-radius: 0.2rem;
+}
+
+a:hover {
+    background-color: var(--letterDisplay);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5));
+    text-decoration: overline;
+}
+
 .resultsCount {
     min-width: 2rem;
 }
 
 .container {
+    position: relative;
     padding: 1rem;
     background-color: var(--containerBackgroundColour);
     color: var(--mainColour);
@@ -64,6 +91,19 @@ body {
     border-radius: 0.3rem;
     box-shadow: 2px 2px 0 2px var(--mainColourDarker);
 }
+
+@media only screen and (max-width: 1600px) {
+    .container {
+        width: 90vw;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    .container {
+        width: 100vw;
+        font-size: 0.8rem;
+    }
+} 
 
 .mainHeading, .resultsHeading {
     text-shadow: 3px 3px 3px var(--mainColourDarker);
@@ -87,4 +127,15 @@ input {
 
 input::placeholder {
     color: rgb(245, 245, 245);
+}
+footer {
+    width: 30vw;
+}
+
+#footInfo, .fbLink{
+    /* width: 30vw; */
+    margin: auto;
+    display: inline-block;
+    color: whitesmoke;
+    text-align: center;
 }

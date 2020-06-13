@@ -5,6 +5,7 @@ const ALPHABET = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm
 const lett = document.querySelector('#lett');
 const inputLetters = document.querySelector('#inputLetters');
 const resultsHeading = document.querySelector('#resultsHeading');
+const footInfo = document.querySelector('#footInfo');
 
 let firstUseFlag = false;
 let lettersArr = [];
@@ -20,6 +21,7 @@ class Letter {
 
 (function () {
     allWords = processList();
+    footInfo.innerHTML = `<a class="fbLink" target="_blank" href="https://www.facebook.com/nickeax">Nick Fletcher ${new Date().getFullYear(0)}</a>`;
 }());
 
 inputLetters.addEventListener('keyup', _ => {
@@ -49,6 +51,10 @@ function buildInputLetters(str) {
     lettersArr.forEach(x => {
         lett.innerHTML += `<span class="inputLetters">${x.letter}</span>`;
     });
+    lett.innerHTML += `
+    <span class="faded">${str.length}</span>
+    <a href="https://dictionary.cambridge.org/dictionary/english/${str}" target="_blank">definition</a>
+    `;
 }
 
 function processList() {
@@ -115,7 +121,10 @@ function fetchTest() {
         res.forEach(y => {
             resultsList.innerHTML += `<span class="inputLetters">${y}</span>`;
         })
-        resultsList.innerHTML += "<br>";
+        resultsList.innerHTML += `
+        <span class="faded">${x.length}</span>
+        <a href="https://dictionary.cambridge.org/dictionary/english/${x}" target="_blank">definition</a>
+        <br>`;
     });
 }
 
