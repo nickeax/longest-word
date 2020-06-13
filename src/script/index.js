@@ -7,19 +7,8 @@ const inputLetters = document.querySelector('#inputLetters');
 const resultsHeading = document.querySelector('#resultsHeading');
 
 let firstUseFlag = false;
-
-inputLetters.addEventListener('keyup', _ => {
-    firstUseFlag = true;
-    lettersArr = [];
-    if (inputLetters.value.length > 9) {
-        inputLetters.value = "";
-    }
-
-    buildInputLetters(inputLetters.value);
-    fetchTest();
-})
-
-
+let lettersArr = [];
+let allWords = [];
 class Letter {
     letter = '';
     used = false;
@@ -29,7 +18,20 @@ class Letter {
     }
 }
 
-let lettersArr = [];
+(function () {
+    allWords = processList();
+}());
+
+inputLetters.addEventListener('keyup', _ => {
+    firstUseFlag = true;
+    lettersArr = [];
+    if (inputLetters.value.length >= 9) {
+        inputLetters.value = "";
+    }
+
+    buildInputLetters(inputLetters.value);
+    fetchTest();
+})
 
 function resetInputLetters() {
     lettersArr.forEach(x => {
@@ -48,43 +50,58 @@ function buildInputLetters(str) {
 }
 
 function processList() {
-    let arr = words.map(x => {
+    let arr = words;
+    arr = arr.sort((a, b) => {
+        return a.length - b.length;
+    });
+
+    arr = arr.map(x => {
         return x.trim();
-    })
+    });
+
     return arr;
 }
 
-function longestWord(arr) {
-    let arr2 = [];
-    resetInputLetters();
-    arr2 = arr.filter(x => {
+function longestWord() {
+    let tmpArr = [];
+    let i = 0;
+
+    while (allWords[i].length <= lettersArr.length) {
+        tmpArr.push(allWords[i++]);
+    }
+
+    let arr = tmpArr.filter(x => {
         return canBeSpelt(x);
     });
 
-    let tmpArr = arr2.sort((a, b) => {
+    arr = arr.sort((a, b) => {
         return b.length - a.length;
     });
 
-    if (tmpArr.length === 0 && !firstUseFlag) {
+    if (arr.length === 0 && !firstUseFlag) {
         resultsHeading.innerHTML = "No words could be made from those letters!";
-    } else resultsHeading.innerHTML = "Made from your letters";
-    return tmpArr;
+    } else resultsHeading.innerHTML = "Words made from your letters";
+    return arr;
 }
 
-function canBeSpelt(str) {
-    let numPassed = [];
-    lettersArr.forEach(x => {
-        if (str.indexOf(x.letter) !== -1) {
-            x.used = true;
-            numPassed.push(1);
-        }
-    });
+function canBeSpelt(testWord) {
+    resetInputLetters();
+    let test = [];
 
-    return str.length === numPassed.length;
+    for (let i = 0; i < testWord.length; i++) {
+        for (let j = 0; j < lettersArr.length; j++) {
+            if (lettersArr[j].used === false && lettersArr[j].letter === testWord[i]) {
+                test.push(testWord[i]);
+                lettersArr[j].used = true;
+            }
+        }
+    }
+    let testStr = test.join();
+    return (testStr === testWord);
 }
 
 function fetchTest() {
-    let resArr = longestWord(processList());
+    let resArr = longestWord();
     let resultsList = document.querySelector('#resultsList');
     resultsList.innerHTML = "";
 
