@@ -25,7 +25,7 @@ class Letter {
 inputLetters.addEventListener('keyup', _ => {
     firstUseFlag = true;
     lettersArr = [];
-    if (inputLetters.value.length >= MAX_LENGTH) {
+    if (inputLetters.value.length > MAX_LENGTH) {
         inputLetters.value = "";
     }
 
@@ -82,7 +82,7 @@ function longestWord() {
 
     if (arr.length === 0 && !firstUseFlag) {
         resultsHeading.innerHTML = "No words could be made from those letters!";
-    } else resultsHeading.innerHTML = "Words made from your letters";
+    } else resultsHeading.innerHTML = `You can make <span class="inputLetters resultsCount">${arr.length}</span> word${arr.length > 1 || arr.length == 0 ? "s" : ""} from your letters.`;
     return arr;
 }
 
@@ -95,10 +95,13 @@ function canBeSpelt(testWord) {
             if (lettersArr[j].used === false && lettersArr[j].letter === testWord[i]) {
                 test.push(testWord[i]);
                 lettersArr[j].used = true;
+                break;
             }
         }
     }
+
     let testStr = test.join('');
+    
     return (testStr === testWord);
 }
 

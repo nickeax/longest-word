@@ -7,17 +7,23 @@
     box-sizing: border-box;
 }
 body {
-    --hue: 190;
-    --sat: 40%;
-    --mainColour: hsl(calc(var(--hue) + 180), var(--sat), 40%);
-    --mainBackgroundColour:hsl(var(--hue), var(--sat), 56%);
-    --containerBackgroundColour: hsl(var(--hue), var(--sat), 66%);
-    --letterDisplay: hsl(var(--hue), var(--sat), 46%);
+    --hue: 160;
+    --sat: 60%;
+    --lit1: 45%;
+    --lit2: 35%;
+    --lit3: 30%;
+    --rotation: 180;
+    --mainColour: hsl(var(--hue), var(--sat), var(--lit1));
+    --mainColourDarker: hsl(var(--hue), var(--sat), var(--lit3));
+
+    --mainBackgroundColour: hsl(calc(var(--hue) + var(--rotation)), var(--sat), var(--lit3));
+    --containerBackgroundColour: hsl(var(--hue), var(--sat), var(--lit2));
+    --letterDisplay: hsl(var(--hue), var(--sat), var(--lit1));;
 
     --mainHeadingBorderColour: rgba(0, 0, 0, 0.151);
     font-family: "Oswald";
     font-size: 20px;
-    background-color: var(--mainColour);
+    background-color: var(--mainBackgroundColour);
 }
 
 #lett {
@@ -26,20 +32,24 @@ body {
     font-weight: 900;
 }
 
-.inputLetters, .resultsList {
+.inputLetters, .resultsList, .resultsCount {
     text-align: center;
     text-transform: uppercase;
     display: inline-block;
     font-family: "Open Sans";
     background-color: var(--letterDisplay);
-    color: rgb(255, 255, 255);
-    padding: 0.3rem;
+    color: rgba(255, 255, 255, 0.952);
+    padding: 0.2rem;
     margin: 0.1rem;
     margin-bottom: 1rem;
-    min-width: 1.7rem;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(102, 102, 102, 0.322);
+    min-width: 1.8rem;
+    box-shadow: 2px 2px 0px 2px var(--mainColourDarker);
+    border: 1px solid var(--mainColour);
     border-radius: 0.2rem;
+}
+
+.resultsCount {
+    min-width: 2rem;
 }
 
 .container {
@@ -49,14 +59,14 @@ body {
     width: 30vw;
     height: auto;
     margin: 1rem auto;
-    border:2px solid var(--mainColour);
+    /* border-left: 1px solid var(--letterDisplay); */
+    /* border-top: 1px solid var(--letterDisplay); */
     border-radius: 0.3rem;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 0 2px var(--mainColourDarker);
 }
 
 .mainHeading, .resultsHeading {
-    border-top: var(--mainHeadingBorderColour) 1px dashed;
-    border-right: var(--mainHeadingBorderColour) 1px dashed;
+    text-shadow: 3px 3px 3px var(--mainColourDarker);
     margin-bottom: 2rem;
     margin-top: 2rem;
 }
@@ -66,14 +76,15 @@ input {
     border: none;
     width: 100%;
     height: 2.5rem;
+    font-weight: bold;
     text-transform: uppercase;
     background: var(--letterDisplay);
     color: #fff;
     padding: 0.5rem;
-    box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 2px 2px 0 2px var(--mainColourDarker);
     border-radius: 0.2rem;
 }
 
 input::placeholder {
-    color: rgba(245, 245, 245, 0.404);
+    color: rgb(245, 245, 245);
 }
