@@ -9,7 +9,7 @@
 body {
     --hue: 170;
     --sat: 60%;
-    --lit1: 45%;
+    --lit1: 39%;
     --lit2: 35%;
     --lit3: 30%;
     --rotation: 180;
@@ -89,7 +89,7 @@ a:hover {
     position: relative;
     padding: 1rem;
     background-color: var(--containerBackgroundColour);
-    color: var(--mainColour);
+    color: rgba(245, 245, 245, 0.568);
     width: 30vw;
     height: auto;
     margin: 1rem auto;
