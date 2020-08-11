@@ -1,4 +1,6 @@
 import { words } from './data.js';
+import { Letter } from '../../classes/letter.js';
+
 const MAX_LENGTH = 12;
 const ALPHABET = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
@@ -10,14 +12,6 @@ const footInfo = document.querySelector('#footInfo');
 let firstUseFlag = false;
 let lettersArr = [];
 let allWords = [];
-class Letter {
-    letter = '';
-    used = false;
-
-    constructor(l) {
-        this.letter = l;
-    }
-}
 
 (function () {
     allWords = processList();
@@ -30,10 +24,18 @@ inputLetters.addEventListener('keyup', _ => {
     if (inputLetters.value.length > MAX_LENGTH) {
         inputLetters.value = "";
     }
+    process()
+})
 
+function process () {
+    inputLetters.disabled = true
+    inputLetters.classList.add('disabled')
     buildInputLetters(inputLetters.value);
     fetchTest();
-})
+    inputLetters.disabled = false
+    inputLetters.classList.remove('disabled')
+    inputLetters.focus()
+}
 
 function resetInputLetters() {
     lettersArr.forEach(x => {
